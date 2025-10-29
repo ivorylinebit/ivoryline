@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Contacte — IVORY LINE{% endblock %}
+{% block content %}
+<section class="section">
+  <div class="wrap narrow">
+    <h1>Contacte</h1>
+    <p>Atenció al client: <a href="mailto:ivoryline.brand@gmail.com">ivoryline.brand@gmail.com</a></p>
+    <form class="form" method="post" action="#" onsubmit="event.preventDefault(); alert('Missatge enviat (demo).');">
+      <input type="text" placeholder="Nom" required>
+      <input type="email" placeholder="Email" required>
+      <textarea rows="6" placeholder="Missatge"></textarea>
+      <button class="btn btn-primary" type="submit">Envia</button>
+    </form>
+  </div>
+</section>
+{% endblock %}

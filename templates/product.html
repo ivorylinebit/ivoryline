@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% block title %}{{ p.name }} — IVORY LINE{% endblock %}
+{% block content %}
+<section class="section product-page">
+  <div class="wrap product-grid">
+
+    {% set imgs0 = p.images if (p.images is defined) else [] %}
+    {% set first_img = (imgs0[0] if (imgs0|length) > 0 else 'img/hero.jpg') %}
+
+    <div class="gallery">
+      <img id="mainImg" src="{{ url_for('static', filename=first_img) }}" alt="{{ p.name }}">
+
+      <div class="controls">
+        <div id="fbToggle" class="fb-toggle" {% if (imgs0|length) != 2 %}hidden{% endif %}>
+          <button type="button" data-idx="0" class="fb-btn active">Davant</button>
+          <button type="button" data-idx="1" class="fb-btn">Darrere</button>
+        </div>
+      </div>
+
+      <div id="thumbs" class="thumbs">
+        {% for img in imgs0 %}
+          <img class="thumb {% if loop.first %}active{% endif %}"
+               src="{{ url_for('static', filename=img) }}"
+               data-src="{{ url_for('static', filename=img) }}"
+               data-idx="{{ loop.index0 }}"
+               alt="miniatura {{ loop.index }}">
+        {% endfor %}
+      </div>
+
+      {% if p.out_of_stock %}<span class="badge oos big">OUT OF STOCK</span>{% endif %}
+    </div>
+
+    <div class="summary">
+      <h1 class="product-name">{{ p.name }}</h1>
+      <div class="price">{{ p.price }}€</div>
+      <p class="muted">{{ p.tag }}</p>
+
+      <button class="btn btn-wide" disabled>OUT OF STOCK</button>
+      <hr class="divider">
+      <dl class="specs">
+        <dt>Materials</dt><dd>{{ p.materials }}</dd>
+        <dt>Ajust</dt><dd>{{ p.fit }}</dd>
+        <dt>Cura</dt><dd>{{ p.care }}</dd>
+      </dl>
+      <p class="note">Vols avís quan hi hagi estoc? <a href="{{ url_for('contact') }}">Escriu-nos</a>.</p>
+    </div>
+  </div>
+</section>
+
+<script>
+const mainImg = document.getElementById('mainImg');
+const fbToggle = document.getElementById('fbToggle');
+
+document.querySelectorAll('.thumb').forEach((el, i) => {
+  el.addEventListener('click', () => {
+    document.querySelectorAll('.thumb').forEach(t => t.classList.remove('active'));
+    el.classList.add('active');
+    mainImg.src = el.dataset.src;
+    if(fbToggle && !fbToggle.hidden){
+      document.querySelectorAll('.fb-btn').forEach(x => x.classList.remove('active'));
+      const b = document.querySelector('.fb-btn[data-idx="'+i+'"]');
+      if(b) b.classList.add('active');
+    }
+  });
+});
+
+document.querySelectorAll('.fb-btn').forEach(b => {
+  b.addEventListener('click', () => {
+    document.querySelectorAll('.fb-btn').forEach(x => x.classList.remove('active'));
+    b.classList.add('active');
+    const idx = parseInt(b.dataset.idx, 10);
+    const current = document.querySelector('.thumbs .thumb:nth-child(' + (idx+1) + ')');
+    if(current){
+      mainImg.src = current.dataset.src;
+      document.querySelectorAll('.thumb').forEach(t => t.classList.remove('active'));
+      current.classList.add('active');
+    }
+  });
+});
+</script>
+{% endblock %}

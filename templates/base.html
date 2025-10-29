@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{% block title %}IVORY LINE{% endblock %}</title>
+  <meta name="description" content="IVORY LINE — col·leccions de roba amb presència i caràcter.">
+  <meta name="theme-color" content="#d7c49e">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="IVORY LINE">
+  <meta property="og:description" content="Col·leccions de roba amb presència i caràcter.">
+  <meta property="og:image" content="{{ url_for('static', filename='img/hero.jpg') }}">
+  <!-- Tipografies premium: Cormorant Garamond (títols) + Inter (cos) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <!-- Favicons (pots substituir-los més endavant) -->
+  <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicon-32.png') }}">
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='favicon-180.png') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <a class="skip-link" href="#content">Saltar al contingut</a>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="{{ url_for('home') }}" aria-label="IVORY LINE">
+        <img class="logo" src="{{ url_for('static', filename='logo-light.png') }}" alt="IVORY LINE" />
+        <span class="wordmark">IVORY LINE</span>
+      </a>
+      <nav class="nav">
+        <a href="{{ url_for('collection') }}">Col·lecció</a>
+        <a href="{{ url_for('about') }}">Sobre</a>
+        <a href="{{ url_for('contact') }}">Contacte</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="content">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-grid">
+      <div>
+        <h4>IVORY LINE</h4>
+        <p>Essència i caràcter en cada peça.</p>
+      </div>
+      <div>
+        <h4>Navega</h4>
+        <ul class="list-plain">
+          <li><a href="{{ url_for('collection') }}">Col·lecció</a></li>
+          <li><a href="{{ url_for('about') }}">Sobre</a></li>
+          <li><a href="{{ url_for('contact') }}">Contacte</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Newsletter</h4>
+        <form class="newsletter" onsubmit="event.preventDefault(); alert('Gràcies! Et notificarem les novetats.');">
+          <input type="email" placeholder="El teu email" required>
+          <button type="submit">Subscriu-me</button>
+        </form>
+      </div>
+    </div>
+    <p class="legal">© {{ 2025 }} IVORY LINE</p>
+  </footer>
+</body>
+</html>

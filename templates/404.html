@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}No trobat — IVORY LINE{% endblock %}
+{% block content %}
+<section class="section">
+  <div class="wrap narrow center">
+    <h1>Pàgina no trobada</h1>
+    <p>La pàgina que busques no existeix o s'ha mogut.</p>
+    <a class="btn" href="{{ url_for('home') }}">Tornar a l'inici</a>
+  </div>
+</section>
+{% endblock %}

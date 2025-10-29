@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Col·lecció — IVORY LINE{% endblock %}
+{% block content %}
+<section class="section">
+  <div class="wrap">
+    <header class="section-head">
+      <h1>Col·lecció</h1>
+      <input type="search" id="search" class="search" placeholder="Cerca peces..." oninput="filterCards()">
+    </header>
+    <div class="card-grid" id="grid">
+      {% for p in products %}
+      <article class="card" data-name="{{ p.name|lower }} {{ p.tag|lower }}">
+        <div class="media">
+          <a href="{{ url_for('product', slug=p.slug) }}">
+            <img src="{{ url_for('static', filename=p.img) }}" alt="{{ p.name }}">
+            {% if p.out_of_stock %}<span class="badge oos">OUT OF STOCK</span>{% endif %}
+          </a>
+        </div>
+        <div class="card-body">
+          <h3 class="product-title"><a href="{{ url_for('product', slug=p.slug) }}">{{ p.name }}</a></h3>
+          <p class="muted">{{ p.tag }}</p>
+          <div class="price">{{ p.price }}€</div>
+          <button class="btn" disabled>OUT OF STOCK</button>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+<script>
+function filterCards(){
+  const q = document.getElementById('search').value.toLowerCase().trim();
+  document.querySelectorAll('#grid .card').forEach(card => {
+    card.style.display = card.dataset.name.includes(q) ? '' : 'none';
+  });
+}
+</script>
+{% endblock %}
