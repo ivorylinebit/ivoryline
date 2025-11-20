@@ -99,3 +99,14 @@ h3{font-size:22px}
 .fb-toggle{display:flex;gap:8px;margin:10px 0}
 .fb-btn{padding:6px 10px;border-radius:10px;border:1px solid rgba(215,196,158,.35);background:#141417;cursor:pointer}
 .fb-btn.active{border-color:rgba(215,196,158,.8)}
+.tr-banner {
+    width: 100%;
+    text-align: center;
+    padding: 8px 12px;
+    font-size: 13px;
+    background: rgba(255,255,255,0.06);
+    color: rgba(255,255,255,0.75);
+    backdrop-filter: blur(4px);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
